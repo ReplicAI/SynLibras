@@ -5,23 +5,33 @@ from .visualizer import imshow
 import numpy as np
 import random
 
+def show_model(model, submodel=False):
+    tparams = 0
+    print('[Rede] %s\n' % type(model).__name__, flush=True) if not submodel else None
+
+    for i, (name, child) in enumerate(model.named_children()):
+        nparams = sum([p.numel() for p in child.parameters()])
+
+        if submodel:
+            print("\t%s: %3.3f M" % (name, (nparams / 1e6)), flush=True)
+            continue
+
+        print("%s: %3.3f M" % (name, (nparams / 1e6)), flush=True)
+
+        tparams += nparams
+        show_model(child, submodel=torch.triangular_solve)
+
+    if submodel:
+        return
+            
+    print('Número de parâmetros: %.3f M' % (tparams / 1e6), flush=True)
+    print('\n' + '=' * 30, end='\n\n', flush=True)
+
 def unzip(path_file, to_dir):            
     with zipfile.ZipFile(path_file) as zf:
         zf.extractall(to_dir)
 
     return True
-
-def is_custom_kernel_supported():
-    version_str = str(torch.version.cuda).split(".")
-    major = version_str[0]
-    minor = version_str[1]
-    return int(major) >= 10 and int(minor) >= 1
-
-def normalize(v):
-    if type(v) == list:
-        return [normalize(vv) for vv in v]
-
-    return v * torch.rsqrt((torch.sum(v ** 2, dim=1, keepdim=True) + 1e-8))
 
 def change(path1, path2, path_root):
     p1 = [v for v in path1.split("/") if v != ""]

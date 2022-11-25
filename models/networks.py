@@ -7,30 +7,6 @@ from util import util
 
 ### ----------------------- Modulos usados -----------------------------
 
-class BaseNetwork(nn.Module):
-    def __init__(self, opt):
-        super().__init__()
-        self.opt = opt
-
-    def print_architecture(self):
-        name = type(self).__name__
-        result = '-------------------%s---------------------\n' % name
-        total_num_params = 0
-
-        for i, (name, child) in enumerate(self.named_children()):
-            num_params = sum([p.numel() for p in child.parameters()])
-            total_num_params += num_params
-            result += "%s: %3.3fM\n" % (name, (num_params / 1e6))
-
-            for i, (name, grandchild) in enumerate(child.named_children()):
-                num_params = sum([p.numel() for p in grandchild.parameters()])
-                result += "\t%s: %3.3fM\n" % (name, (num_params / 1e6))
-                
-        result += '[Network %s] Total number of parameters : %.3f M\n' % (name, total_num_params / 1e6)
-        result += '-----------------------------------------------\n'
-        print(result)
-
-
 class PixelNorm(nn.Module):
     def __init__(self):
         super().__init__()
@@ -201,9 +177,9 @@ class UpsamplingBlock(nn.Module):
 
 ### ----------------------- Modelos Utilizados -----------------------------
 
-class Prior(BaseNetwork):
+class Prior(nn.Module):
     def __init__(self, opt):
-        super().__init__(opt)
+        super().__init__()
 
         # calculo das dimensões
 
@@ -232,7 +208,7 @@ class Prior(BaseNetwork):
 
         self.tanH = nn.Tanh()
 
-        self.print_architecture()
+        util.show_model(self)
 
     def forward(self, pose):
         out = self.camadas(pose)
@@ -245,9 +221,9 @@ class Prior(BaseNetwork):
         return self.tanH(mu), self.tanH(logvar)
 
 
-class Encoder(BaseNetwork):
+class Encoder(nn.Module):
     def __init__(self, opt):
-        super().__init__(opt)
+        super().__init__()
 
         # calculo das dimensões
 
@@ -274,7 +250,7 @@ class Encoder(BaseNetwork):
         self.fc_mu = EqualLinear(inc*2*2, opt.latent_dims, activation=False)
         self.fc_logvar = EqualLinear(inc*2*2, opt.latent_dims, activation=False)
 
-        self.print_architecture()
+        util.show_model(self)
 
     def forward(self, img, pose):
         ip = torch.cat([img, pose], dim=1)
@@ -289,9 +265,9 @@ class Encoder(BaseNetwork):
         return mu, logvar
 
 
-class Generator(BaseNetwork):
+class Generator(nn.Module):
     def __init__(self, opt):
-        super().__init__(opt)
+        super().__init__()
 
         self.opt = opt
         #self.n_camadas = int(math.log(self.opt.size, 2))
@@ -340,7 +316,7 @@ class Generator(BaseNetwork):
 
         self.out = ConvLayer(inc, 3, 3, 1, 1, activate=False, pixelnorm=False)
             
-        self.print_architecture()
+        util.show_model(self)
 
     def forward(self, z, pose):
         # -------------- colocar a pose em todas as dimensões
@@ -372,9 +348,9 @@ class Generator(BaseNetwork):
         return out
 
 
-class Discriminator(BaseNetwork):
+class Discriminator(nn.Module):
     def __init__(self, opt):
-        super().__init__(opt)
+        super().__init__()
 
         # calculo das dimensões
 
@@ -400,7 +376,7 @@ class Discriminator(BaseNetwork):
 
         self.out = EqualLinear(inc*2*2, 1, activation=False)
 
-        self.print_architecture()
+        util.show_model(self)
 
     def forward(self, img):
         pred = self.camadas(img)
