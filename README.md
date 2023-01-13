@@ -13,7 +13,7 @@ The first version of the published code can be found [here](https://github.com/R
 
 <img src='imgs/arc_final.png' width="1000px"/>
 
-Our SynLibras architecture is an CVAE-GAN model. During training, an input RGB image x is received by the Encoder (E) and reconstructed by the Decoder/Generator (G) aiming for the minimization of the L1-norm reconstruction loss. Meanwhile, the heatmap pose representation y is conditioning these two modules. It is also the input of a Prior (P), which is used in the minimization of the KL-divergence. Finally, a Discriminator module (D) classifies the output images as real or fake.
+Our SynLibras architecture is an CVAE-GAN model. During training, an RGB input image x is received by the Encoder (E) and reconstructed by the Decoder/Generator (G) aiming for the minimization of the L1-norm reconstruction loss. Meanwhile, the heatmap pose representation y is conditioning these two modules. It is also the input of a Prior (P), which is used in the minimization of the KL-divergence. Finally, a Discriminator module (D) classifies the output images as real or fake.
 
 ## Installation / Requirements
 
@@ -26,7 +26,7 @@ The model was trained using the PHOENIX-2014 database which can be found here:
 
 [RWTH-PHOENIX-Weather 2014](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/)
 
-The images used for training and testing can be found in the directory `phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px`. For both training and testing, data were selected every 30 images. In addition, the images were resized to 260x260 pixels before being used by the OpenPose (pose estimator):
+The images used for training and testing can be found in the directory `phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px`. For both training and testing, every 30th image was included. In addition, the images were resized to 260x260 pixels before being used by the OpenPose (pose estimator):
 
 [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose)
 
@@ -63,4 +63,4 @@ The training continues by default from the last checkpoint. To start from scratc
 
 ## Acknowledgment
 
-Some parts of the code were inspired/copied from the [Swapping Autoencoder for Deep Image Manipulation](https://github.com/taesungp/swapping-autoencoder-pytorch) implementation.
+Some parts of the code were inspired by or copied from the [Swapping Autoencoder for Deep Image Manipulation](https://github.com/taesungp/swapping-autoencoder-pytorch) implementation.
