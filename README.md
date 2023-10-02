@@ -1,9 +1,20 @@
 # SynLibras V2
 
-SynLibras: A Disentangled Deep Generative Model for Brazilian Sign Language Synthesis.
-Wellington Silveira (FURG); Andrew Allaniz (FURG); Marina Hurtado (FURG); Bernardo Castello (FURG); 
-Rodrigo de Bem (FURG).
-SIBGRAPI 2022.
+[SynLibras](https://ieeexplore.ieee.org/document/9991748) is a Disentangled Deep Generative Model for Brazilian Sign Language Synthesis by
+Wellington Silveira, Andrew Allaniz, Marina Hurtado, Bernardo Castello and 
+Rodrigo de Bem, from the Federal University of Rio Grande (FURG), presented in SIBGRAPI 2022, Natal/RN, Brazil.
+
+To cite the paper use the BibTeX entry below:
+```
+@inproceedings{silveira2022synlibras,
+  title={SynLibras: A Disentangled Deep Generative Model for Brazilian Sign Language Synthesis},
+  author={Silveira, Wellington and Alaniz, Andrew and Hurtado, Marina and da Silva, Bernardo Castello and de Bem, Rodrigo},
+  booktitle={2022 35th SIBGRAPI Conference on Graphics, Patterns and Images (SIBGRAPI)},
+  volume={1},
+  pages={210--215},
+  year={2022},
+}
+```
 
 The first version of the published code can be found [here](https://github.com/ReplicAI/SynLibras_V1)
 
@@ -63,4 +74,6 @@ The training continues by default from the last checkpoint. To start from scratc
 
 ## Acknowledgment
 
-Some parts of the code were inspired by or copied from the [Swapping Autoencoder for Deep Image Manipulation](https://github.com/taesungp/swapping-autoencoder-pytorch) implementation.
+Some parts of the code were inspired by or copied from the [Swapping Autoencoder for Deep Image Manipulation](https://github.com/taesungp/swapping-autoencoder-pytorch) implementation. 
+
+This work is supported by FAPERGS grant ARD-21/2551-0000678-1.
