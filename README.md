@@ -1,8 +1,8 @@
 # SynLibras V2
 
-[SynLibras](https://ieeexplore.ieee.org/document/9991748) is a Disentangled Deep Generative Model for Brazilian Sign Language Synthesis by
+The [SynLibras](http://sibgrapi.sid.inpe.br/col/sid.inpe.br/sibgrapi/2022/09.28.01.48/doc/thisInformationItemHomePage.html) is a Disentangled Deep Generative Model for Brazilian Sign Language Synthesis by
 Wellington Silveira, Andrew Allaniz, Marina Hurtado, Bernardo Castello and 
-Rodrigo de Bem, from the Federal University of Rio Grande (FURG), presented in SIBGRAPI 2022, Natal/RN, Brazil.
+Rodrigo de Bem, from the Center of Computational Sciences (C3), at the Federal University of Rio Grande (FURG). The work was presented in the SIBGRAPI 2022, Natal/RN, Brazil.
 
 To cite the paper use the BibTeX entry below:
 ```
