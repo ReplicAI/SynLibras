@@ -37,9 +37,10 @@ The model was trained using the PHOENIX-2014 database which can be found here:
 
 [RWTH-PHOENIX-Weather 2014](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/)
 
-The images used for training and testing can be found in the directory `phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px`. For both training and testing, every 30th image was included. In addition, the images were resized to 260x260 pixels before being used by the OpenPose (pose estimator):
+The images used for training and testing can be found in the directory `phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px`. For both training and testing, every 30th image was included. In addition, the images were resized to 260x260 pixels before being used by the human pose estimator [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose).
 
-[OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose)
+Also, the [SynLibras-Pose dataset](https://github.com/ReplicAI/SynLibras-Pose-dataset), the first Libras dataset with keypoints annotations of the body, hands, and
+faces of the signers was used for testing.
 
 ## Testing
 
