@@ -81,28 +81,32 @@ class EqualLinear(nn.Module):
         )
 
 
-class ConvLayer(nn.Sequential):
-    def __init__(self, in_c, out_c, kernel, stride, padding, bias=True, activate=True, pixelnorm=True, batchnorm=False, reflection_pad=False):
-        layers = []
+class ConvLayer(nn.Module):
+    def __init__(self, in_c, out_c, kernel, stride, padding, bias=True, activate=True, pixelnorm=True, batchnorm=False):
+        super().__init__()
 
-        if reflection_pad:
-            layers.append(("pad", nn.ReflectionPad2d(padding)))
-            padding = 0
+        self.layer = EqualConv2d(in_c, out_c, kernel, padding=padding, stride=stride, bias=bias and not activate)
+        self.norm = pixelnorm and not batchnorm
+        self.normalize = PixelNorm()
+        self.batchnorm = nn.BatchNorm2d(out_c) if batchnorm else None
 
-        layers.append(("conv", EqualConv2d(in_c, out_c, kernel, padding=padding, stride=stride, bias=bias and not activate)))
-
-        if batchnorm:
-            layers.append(("norm", nn.BatchNorm2d(out_c)))
-        elif pixelnorm:
-            layers.append(("norm", PixelNorm()))
+        self.act = None
 
         if activate:
-            layers.append(("act", nn.LeakyReLU(0.2)))
-
-        super().__init__(OrderedDict(layers))
+            self.act = nn.LeakyReLU(0.2)
 
     def forward(self, x):
-        out = super().forward(x)
+        out = self.layer(x)
+
+        if self.batchnorm is not None:
+            out = self.batchnorm(out)
+
+        if self.act is not None:
+            out = self.act(out)
+
+        if self.norm:
+            out = self.normalize(out)
+        
         return out
 
 class ResBlock(nn.Module):
