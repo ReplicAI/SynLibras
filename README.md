@@ -44,6 +44,10 @@ faces of the signers was used for testing.
 
 ## Testing
 
+We provide the pretrained model here:
+
+[pretrained model (~860MB)](https://drive.google.com/file/d/1i5nQyz8tjFv1JZ2P4NQOoiwnFutbyirl/view?usp=sharing)
+
 To run simple reconstruction, the images (ex: 0.png, 1.png, ...) must be placed in a folder called `frames` and the keypoints (ex: 0_keypoints.json, 1_keypoints.json, ...) must be placed in a folder called `keypoints`. Both folders must be in the same directory, like: `/dataroot/frames` and `/dataroot/keypoints`. This `dataroot` directory should be used as a parameter for the program.
 
 ```bash
