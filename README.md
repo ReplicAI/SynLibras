@@ -58,6 +58,18 @@ phoenix256_vvix_0 \
 --out_dir [path_to_results]
 ```
 
+To perform pose transfer, just like in the case of reconstruction, the images should be placed in a folder named `frames`, and the keypoints should be placed in a folder named `keypoints`. For each image, the transfer will be done to all the poses in the 'keypoints' folder.
+
+```bash
+python transfer.py \
+phoenix256_vvix_0 \
+[path_to_checkpoint] \
+[path_to_data] \
+--out_dir [path_to_results]
+```
+
+An example of reconstruction and pose transfer can be found in this Colab notebook: [SynLibras_Example](https://colab.research.google.com/drive/1VVGzYW0FGUxmdg-VDpAj7tQX7zBeZxST?usp=sharing)
+
 ## Training
 
 ### Training Scripts
